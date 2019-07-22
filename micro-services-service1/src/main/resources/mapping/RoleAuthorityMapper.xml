@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xgg.microservices.mapper.RoleAuthorityMapper">
+  <resultMap id="BaseResultMap" type="com.xgg.microservices.POJO.DO.RoleAuthority">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="role_id" jdbcType="BIGINT" property="roleId" />
+    <result column="authority_id" jdbcType="BIGINT" property="authorityId" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="is_deleted" jdbcType="CHAR" property="isDeleted" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, role_id, authority_id, gmt_create, is_deleted
+  </sql>
+</mapper>
