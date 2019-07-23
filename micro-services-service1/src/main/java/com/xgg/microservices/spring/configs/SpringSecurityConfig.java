@@ -2,7 +2,6 @@ package com.xgg.microservices.spring.configs;
 
 import com.xgg.microservices.spring.security.SecurityUserDetailsService;
 import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -31,9 +30,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.requestMatcher(EndpointRequest.toAnyEndpoint()).authorizeRequests()
-                .anyRequest().permitAll();
-        /*http
+        http
                 .authorizeRequests()
                 .anyRequest().authenticated()
                 .and()
@@ -42,7 +39,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement()
                 .maximumSessions(1).maxSessionsPreventsLogin(true)
                 .expiredUrl("/login").and()
-                .invalidSessionUrl("/login");*/
+                .invalidSessionUrl("/login");
+        http.csrf()
+                .ignoringAntMatchers("/actuator/**");
     }
 
 

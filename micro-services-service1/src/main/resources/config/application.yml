@@ -6,7 +6,7 @@ server:
 
 spring:
   profiles:
-    active: company
+    active: home
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
@@ -49,6 +49,14 @@ spring:
     admin:
       client:
         url: "http://localhost:8085"
+        username: rencw
+        password: 123456
+        instance:
+          name: "micro-services-service1"
+          metadata:
+            user.name: user1
+            user.password: 123456
+
 
 mybatis:
   mapper-locations: classpath:mapping/*/*.xml

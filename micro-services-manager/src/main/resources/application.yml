@@ -1,2 +1,8 @@
 server:
   port: 8085
+spring:
+  security:
+    user:
+      name: rencw
+      password: 123456
+
