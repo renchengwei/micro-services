@@ -70,6 +70,10 @@ pagehelper:
   params: count=countSql
 
 management:
+  metrics:
+    web:
+      server:
+        auto-time-requests: true
   endpoints:
     web:
       exposure:
