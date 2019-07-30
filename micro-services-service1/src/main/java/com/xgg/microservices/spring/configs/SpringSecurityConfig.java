@@ -30,18 +30,25 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
+        http.formLogin().loginPage("/login.html")
+                .loginProcessingUrl("/user/login").successForwardUrl("/user/login")
+                .and()
+                .authorizeRequests().antMatchers("/login.html","/user/login")
+                .permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().and()
+                .httpBasic().and().csrf().disable();
+
+        /*http
+                .authorizeRequests()
+                .anyRequest().authenticated().antMatchers("/user/login").permitAll()
+                .and()
+                .formLogin().loginPage("/user/login").loginProcessingUrl("/user/loginProcess").and()
                 .httpBasic().and()
                 .sessionManagement()
                 .maximumSessions(1).maxSessionsPreventsLogin(true)
-                .expiredUrl("/login").and()
-                .invalidSessionUrl("/login");
-        http.csrf()
-                .ignoringAntMatchers("/actuator/**");
+                .expiredUrl("/user/login").and()
+                .invalidSessionUrl("/user/login");*/
     }
 
 
