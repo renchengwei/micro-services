@@ -1,5 +1,7 @@
 package com.xgg.microservices;
 
+import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
@@ -49,6 +51,9 @@ public class CodeGenerator {
                 .setMapperName("%sMapper")
                 .setXmlName("%sMapper")
                 .setServiceName("%sServer")
+                .setServiceImplName("%sServerImpl")
+                .setControllerName("%sController")
+                .setIdType(IdType.AUTO)
                 .setBaseColumnList(true)
                 .setBaseResultMap(true)
                 .setEnableCache(true);
@@ -56,19 +61,24 @@ public class CodeGenerator {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8");
+        dsc.setUrl("jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8")
+                .setDriverName("com.mysql.cj.jdbc.Driver")
+                .setUsername("test")
+                .setPassword("123456")
+                .setDbType(DbType.MYSQL);
         // dsc.setSchemaName("public");
-        dsc.setDriverName("com.mysql.cj.jdbc.Driver");
-        dsc.setUsername("test");
-        dsc.setPassword("123456");
         mpg.setDataSource(dsc);
 
         // 包配置
         PackageConfig pc = new PackageConfig();
-        pc.setModuleName(scanner("模块名"));
-        pc.setParent("com.xgg.microservices");
-        pc.setEntity("pojo.domain");
-        pc.setMapper("dao");
+        pc.setModuleName(scanner("模块名"))
+                .setParent("com.xgg.microservices")
+                .setEntity("pojo.domain")
+                .setService("service")
+                .setMapper("dao")
+                .setServiceImpl("service.impl")
+                .setController("controller")
+                .setXml("");
         mpg.setPackageInfo(pc);
 
         // 自定义配置
