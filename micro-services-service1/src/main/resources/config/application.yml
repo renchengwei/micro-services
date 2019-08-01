@@ -57,17 +57,10 @@ spring:
             user.name: user1
             user.password: 123456
 
-
-mybatis:
+mybatis-plus:
   mapper-locations: classpath:mapping/*/*.xml
-  type-aliases-package: com.xgg.microservices.POJO.DO
+  type-aliases-package: com.xgg.microservices.pojo.domain
 
-
-pagehelper:
-  helperDialect: mysql
-  reasonable: true
-  supportMethodsArguments: true
-  params: count=countSql
 
 management:
   metrics:

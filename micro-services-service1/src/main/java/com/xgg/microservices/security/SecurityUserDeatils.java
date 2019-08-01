@@ -1,18 +1,34 @@
-package com.xgg.microservices.spring.security;
+package com.xgg.microservices.security;
 
-import com.xgg.microservices.POJO.DO.User;
+import com.xgg.microservices.pojo.domain.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-public class SecurityUserDeatils extends User implements UserDetails {
+public class SecurityUserDeatils implements UserDetails {
+
+    private String userName;
+
+    private String password;
 
     private Collection<GrantedAuthority> authorities;
 
     public SecurityUserDeatils() {
 
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public SecurityUserDeatils(User user) {
@@ -30,12 +46,12 @@ public class SecurityUserDeatils extends User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return super.getPassword();
+        return getPassword();
     }
 
     @Override
     public String getUsername() {
-        return super.getUserName();
+        return getUserName();
     }
 
     @Override

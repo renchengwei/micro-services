@@ -33,7 +33,7 @@
             <property name="forceBigDecimals" value="false" />
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="com.xgg.microservices.POJO.DO"
+        <javaModelGenerator targetPackage="com.xgg.microservices.pojo.domain"
                             targetProject="src/main/java">
             <property name="enableSubPackages" value="false" />
             <property name="trimStrings" value="true" />
@@ -45,7 +45,7 @@
         </sqlMapGenerator>
 
         <javaClientGenerator type="XMLMAPPER"
-                             targetPackage="com.xgg.microservices.mapper"
+                             targetPackage="com.xgg.microservices.dao"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>

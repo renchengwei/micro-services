@@ -1,4 +1,4 @@
-package com.xgg.microservices.spring.configs;
+package com.xgg.microservices.configs;
 
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.format.FormatterRegistry;

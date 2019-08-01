@@ -1,6 +1,6 @@
-package com.xgg.microservices.spring.security;
+package com.xgg.microservices.security;
 
-import com.xgg.microservices.POJO.DO.User;
+import com.xgg.microservices.pojo.domain.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

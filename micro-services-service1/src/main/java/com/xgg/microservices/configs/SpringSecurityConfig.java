@@ -1,6 +1,6 @@
-package com.xgg.microservices.spring.configs;
+package com.xgg.microservices.configs;
 
-import com.xgg.microservices.spring.security.SecurityUserDetailsService;
+import com.xgg.microservices.security.SecurityUserDetailsService;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -31,9 +31,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin().loginPage("/login.html")
-                .loginProcessingUrl("/user/login").successForwardUrl("/user/login")
+                .loginProcessingUrl("/login").successForwardUrl("/index")
                 .and()
-                .authorizeRequests().antMatchers("/login.html","/user/login")
+                .authorizeRequests().antMatchers("/login.html","/login")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()

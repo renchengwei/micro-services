@@ -61,7 +61,7 @@
     <logger name="druid.sql.ResultSet" level="DEBUG" additivity="true"/>
 
     <!--开发环境:打印控制台-->
-    <springProfile name="company">
+    <springProfile name="home">
         <root level="info">
             <appender-ref ref="CONSOLE" />
         </root>
