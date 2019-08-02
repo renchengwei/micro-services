@@ -55,7 +55,7 @@ public class CodeGenerator {
                 .setAuthor("renchengwei")
                 .setOpen(false)
                 .setFileOverride(true)
-                .setEntityName("%sDO")
+                .setEntityName("%sPO")
                 .setMapperName("%sMapper")
                 .setXmlName("%sMapper")
                 .setControllerName("%sController")
@@ -80,7 +80,7 @@ public class CodeGenerator {
         // 数据源配置
         PackageConfig pc = new PackageConfig();
         pc.setParent("com.xgg.microservices")
-                .setEntity("pojo.domain")
+                .setEntity("pojo.po")
                 .setMapper("dao")
                 .setXml(projectPath + module() + "/src/main/resources/mapper/");
         mpg.setPackageInfo(pc);
