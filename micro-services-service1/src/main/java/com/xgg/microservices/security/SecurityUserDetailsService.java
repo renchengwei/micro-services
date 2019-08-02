@@ -1,6 +1,5 @@
 package com.xgg.microservices.security;
 
-import com.xgg.microservices.pojo.domain.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,11 +16,10 @@ public class SecurityUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         String encode = bCryptPasswordEncoder.encode("123456");
-        User user = new User();
-        user.setUserName("user1");
-        user.setPassword(encode);
         Collection<GrantedAuthority> authorities = getAuthority();
-        SecurityUserDeatils securityUserDeatils = new SecurityUserDeatils(user);
+        SecurityUserDeatils securityUserDeatils = new SecurityUserDeatils();
+        securityUserDeatils.setUserName("user1");
+        securityUserDeatils.setPassword(encode);
         securityUserDeatils.setAuthorities(authorities);
         return securityUserDeatils;
     }

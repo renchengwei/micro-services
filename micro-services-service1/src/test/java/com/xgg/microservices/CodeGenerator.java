@@ -22,77 +22,79 @@ import java.util.Scanner;
  * @Description: TODO
  */
 public class CodeGenerator {
-    public static String scanner(String tip) {
-        Scanner scanner = new Scanner(System.in);
-        StringBuilder help = new StringBuilder();
-        help.append("请输入" + tip + "：");
-        System.out.println(help.toString());
-        if (scanner.hasNext()) {
-            String ipt = scanner.next();
-            if (StringUtils.isNotEmpty(ipt)) {
-                return ipt;
-            }
-        }
-        throw new MybatisPlusException("请输入正确的" + tip + "！");
+
+    private static String projectPath;
+
+    public static String module() {
+        return "/micro-services-service1";
     }
 
     public static void main(String[] args) {
+        projectPath = System.getProperty("user.dir");
         // 代码生成器
         AutoGenerator mpg = new AutoGenerator();
+        globalConfig(mpg);
+        dataSourceConfig(mpg);
+        packageConfig(mpg);
+        injectionConfig(mpg);
+        templateConfig(mpg);
+        strategyConfig(mpg);
+        mpg.execute();
+    }
 
+    /**
+     * @Author renchengwei
+     * @Date 2019/8/2
+     * @Description 全局配置
+     */
+    private static void globalConfig(AutoGenerator mpg) {
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        String projectPath = System.getProperty("user.dir");
-        gc.setOutputDir(projectPath + "/src/main/java")
+
+        gc.setOutputDir(projectPath + module() + "/src/main/java")
                 .setAuthor("renchengwei")
                 .setOpen(false)
                 .setFileOverride(true)
                 .setEntityName("%sDO")
                 .setMapperName("%sMapper")
                 .setXmlName("%sMapper")
-                .setServiceName("%sServer")
-                .setServiceImplName("%sServerImpl")
                 .setControllerName("%sController")
                 .setIdType(IdType.AUTO)
                 .setBaseColumnList(true)
                 .setBaseResultMap(true)
                 .setEnableCache(true);
         mpg.setGlobalConfig(gc);
+    }
 
+    private static void dataSourceConfig(AutoGenerator mpg) {
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8")
+        dsc.setUrl("jdbc:mysql://192.168.58.251:3306/mytest?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8")
                 .setDriverName("com.mysql.cj.jdbc.Driver")
-                .setUsername("test")
+                .setUsername("mytest")
                 .setPassword("123456")
                 .setDbType(DbType.MYSQL);
-        // dsc.setSchemaName("public");
         mpg.setDataSource(dsc);
-
-        // 包配置
+    }
+    private static void packageConfig(AutoGenerator mpg) {
+        // 数据源配置
         PackageConfig pc = new PackageConfig();
-        pc.setModuleName(scanner("模块名"))
-                .setParent("com.xgg.microservices")
+        pc.setParent("com.xgg.microservices")
                 .setEntity("pojo.domain")
-                .setService("service")
                 .setMapper("dao")
-                .setServiceImpl("service.impl")
-                .setController("controller")
-                .setXml("");
+                .setXml(projectPath + module() + "/src/main/resources/mapper/");
         mpg.setPackageInfo(pc);
-
-        // 自定义配置
+    }
+    // 自定义配置
+    private static void injectionConfig(AutoGenerator mpg) {
         InjectionConfig cfg = new InjectionConfig() {
             @Override
             public void initMap() {
                 // to do nothing
             }
         };
-
-        // 如果模板引擎是 freemarker
-        String templatePath = "/templates/mapper.xml";
         // 如果模板引擎是 velocity
-        // String templatePath = "/templates/mapper.xml.vm";
+         String templatePath = "/templates/mapper.xml.vm";
 
         // 自定义输出配置
         List<FileOutConfig> focList = new ArrayList<>();
@@ -101,8 +103,8 @@ public class CodeGenerator {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-                return projectPath + "/src/main/resources/mapper/" + pc.getModuleName()
-                        + "/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
+                return projectPath + module() + "/src/main/resources/mapper/"
+                        + "/" + tableInfo.getMapperName() + StringPool.DOT_XML;
             }
         });
         /*
@@ -117,35 +119,31 @@ public class CodeGenerator {
         */
         cfg.setFileOutConfigList(focList);
         mpg.setCfg(cfg);
+    }
 
+    private static void templateConfig(AutoGenerator mpg) {
         // 配置模板
         TemplateConfig templateConfig = new TemplateConfig();
-
-        // 配置自定义输出模板
         //指定自定义模板路径，注意不要带上.ftl/.vm, 会根据使用的模板引擎自动识别
-        // templateConfig.setEntity("templates/entity2.java");
-        // templateConfig.setService();
-        // templateConfig.setController();
-
-        templateConfig.setXml(null);
+        templateConfig.setXml(null)
+                .setEntity("/templates/entity.java")
+                .setController("/templates/controller.java")
+                .setMapper("/templates/mapper.java")
+                .setService("/templates/service.java")
+                .setServiceImpl("/templates/serviceImpl.java");
         mpg.setTemplate(templateConfig);
+    }
 
+    private static void strategyConfig(AutoGenerator mpg) {
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
-        strategy.setNaming(NamingStrategy.underline_to_camel);
-        strategy.setColumnNaming(NamingStrategy.underline_to_camel);
-        strategy.setSuperEntityClass("com.baomidou.ant.common.BaseEntity");
-        strategy.setEntityLombokModel(true);
-        strategy.setRestControllerStyle(true);
-        // 公共父类
-        strategy.setSuperControllerClass("com.baomidou.ant.common.BaseController");
-        // 写于父类中的公共字段
-        strategy.setSuperEntityColumns("id");
-        strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
-        strategy.setControllerMappingHyphenStyle(true);
-        strategy.setTablePrefix(pc.getModuleName() + "_");
+        strategy.setNaming(NamingStrategy.underline_to_camel)
+                .setColumnNaming(NamingStrategy.underline_to_camel)
+                .setEntityLombokModel(true)
+                .setRestControllerStyle(true)
+                .setEntityBooleanColumnRemoveIsPrefix(true)
+                .setLogicDeleteFieldName("is_deleted")
+                .setControllerMappingHyphenStyle(false);
         mpg.setStrategy(strategy);
-        mpg.setTemplateEngine(new FreemarkerTemplateEngine());
-        mpg.execute();
     }
 }

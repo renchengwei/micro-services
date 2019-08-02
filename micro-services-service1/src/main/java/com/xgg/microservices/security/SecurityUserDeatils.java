@@ -1,6 +1,5 @@
 package com.xgg.microservices.security;
 
-import com.xgg.microservices.pojo.domain.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,9 +30,9 @@ public class SecurityUserDeatils implements UserDetails {
         this.password = password;
     }
 
-    public SecurityUserDeatils(User user) {
-        BeanUtils.copyProperties(user,this);
-    }
+//    public SecurityUserDeatils(User user) {
+//        BeanUtils.copyProperties(user,this);
+//    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
