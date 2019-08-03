@@ -59,7 +59,7 @@ spring:
 
 mybatis-plus:
   mapper-locations: classpath:mapper/*/*.xml
-  type-aliases-package: com.xgg.microservices.pojo.domain
+  type-aliases-package: com.xgg.microservices.pojo.po
 
 
 management:
@@ -78,3 +78,15 @@ management:
   endpoint:
     health:
       show-details: always
+
+xgg:
+  auth:
+    browser:
+      loginType: REDIRECT
+      loginPage: /authentication/require
+      loginProcessingUrl: /login
+      successForwardUrl: /index
+      failureForwardUrl: /login.html
+      requireUrl: /login.html
+    imageCaptcha:
+      interceptImageUrl: "/user/*,/pay/confirm"

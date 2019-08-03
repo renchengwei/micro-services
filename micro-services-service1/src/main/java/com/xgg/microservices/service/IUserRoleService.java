@@ -4,10 +4,13 @@ import com.xgg.microservices.pojo.po.UserRolePO;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
- * @Author renchengwei
- * @Date 2019-08-03
- * @Description
+ * <p>
+ *  服务类
+ * </p>
+ *
+ * @author renchengwei
+ * @since 2019-08-03
  */
-public interface IUserRoleService {
+public interface IUserRoleService extends IService<UserRolePO> {
 
 }

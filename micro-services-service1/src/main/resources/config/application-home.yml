@@ -1,6 +1,6 @@
 spring:
   datasource:
     druid:
-      url: jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8
-      username: test
-      password: 111111
+      url: jdbc:mysql://localhost:3306/mytest?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8
+      username: mytest
+      password: 123456

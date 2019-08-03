@@ -1,12 +1,12 @@
 package com.xgg.microservices.pojo.po;
 
 import com.baomidou.mybatisplus.annotation.*;
-
-import java.time.LocalDateTime;
-import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * @Author renchengwei
@@ -18,6 +18,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("role_authority")
 public class RoleAuthorityPO implements Serializable {
+
 
     private static final long serialVersionUID=1L;
 

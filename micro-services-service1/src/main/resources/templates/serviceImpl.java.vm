@@ -7,9 +7,12 @@ import ${superServiceImplClassPackage};
 import org.springframework.stereotype.Service;
 
 /**
- * @Author ${author}
- * @Date ${date}
- * @Description
+ * <p>
+ * $!{table.comment} 服务实现类
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
  */
 @Service
 #if(${kotlin})
@@ -17,7 +20,7 @@ open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperNam
 
 }
 #else
-public class ${table.serviceImplName} implements ${table.serviceName} {
+public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}> implements ${table.serviceName} {
 
 }
 #end

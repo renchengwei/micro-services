@@ -1,6 +1,6 @@
 package com.xgg.microservices.configs;
 
-import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.*;
 
 import java.util.List;
 
-@Configurable
+@Configuration
 public class SpringMvcConfig implements WebMvcConfigurer {
     @Override
     public void configurePathMatch(PathMatchConfigurer configurer) {

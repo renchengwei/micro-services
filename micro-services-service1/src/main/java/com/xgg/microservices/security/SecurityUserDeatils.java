@@ -1,6 +1,5 @@
 package com.xgg.microservices.security;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -45,12 +44,12 @@ public class SecurityUserDeatils implements UserDetails {
 
     @Override
     public String getPassword() {
-        return getPassword();
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return getUserName();
+        return userName;
     }
 
     @Override

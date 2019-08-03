@@ -7,11 +7,14 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
- * @Author renchengwei
- * @Date 2019-08-03
- * @Description
+ * <p>
+ *  服务实现类
+ * </p>
+ *
+ * @author renchengwei
+ * @since 2019-08-03
  */
 @Service
-public class AuthorityServiceImpl implements IAuthorityService {
+public class AuthorityServiceImpl extends ServiceImpl<AuthorityMapper, AuthorityPO> implements IAuthorityService {
 
 }
