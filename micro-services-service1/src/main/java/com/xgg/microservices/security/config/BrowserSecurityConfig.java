@@ -64,7 +64,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().antMatchers(securityProperties.getBrowser().getLoginPage(),
 //                    securityProperties.getBrowser().getLoginProcessingUrl(),
                     securityProperties.getBrowser().getRequireUrl(),
-                    "/captcha/image")
+                    "/captcha/*")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()

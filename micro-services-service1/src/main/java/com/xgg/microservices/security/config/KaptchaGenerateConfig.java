@@ -28,7 +28,7 @@ public class KaptchaGenerateConfig {
         //常量配置Constants和直接字符串配置都可以
         properties.put(Constants.KAPTCHA_TEXTPRODUCER_FONT_COLOR, "black");
 
-        properties.setProperty("kaptcha.textproducer.char.length", String.valueOf(securityProperties.getImageCaptcha().getSize()));
+        properties.setProperty("kaptcha.textproducer.char.length", String.valueOf(securityProperties.getCaptcha().getImage().getSize()));
 
         Config config = new Config(properties);
         DefaultKaptcha defaultKaptcha = new DefaultKaptcha();

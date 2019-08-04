@@ -1,6 +1,5 @@
 package com.xgg.microservices.security.captcha;
 
-import com.xgg.microservices.pojo.vo.ImageCaptchaVO;
 import com.xgg.microservices.security.properties.SecurityProperties;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,7 +28,7 @@ import java.util.stream.Stream;
 /**
  * @Author: renchengwei
  * @Date: 2019-08-03
- * @Description: 图片验证码过滤器
+ * @Description: 验证码过滤器
  */
 @Slf4j
 @Getter
@@ -45,7 +44,7 @@ public class CaptchaFilter extends OncePerRequestFilter implements InitializingB
     @Override
     public void afterPropertiesSet() throws ServletException {
         super.afterPropertiesSet();
-        String configInterceptUrl = securityProperties.getImageCaptcha().getInterceptImageUrl();
+        String configInterceptUrl = securityProperties.getCaptcha().getImage().getInterceptImageUrl();
         if (StringUtils.isNotBlank(configInterceptUrl)) {
             String[] configInterceptUrlArray = StringUtils.split(configInterceptUrl, ",");
             interceptUrlSet = Stream.of(configInterceptUrlArray).collect(Collectors.toSet());
@@ -80,7 +79,7 @@ public class CaptchaFilter extends OncePerRequestFilter implements InitializingB
     private void validate(HttpServletRequest request) throws ServletRequestBindingException {
 
         ServletWebRequest swr = new ServletWebRequest(request);
-        ImageCaptchaVO imageCodeInSession = (ImageCaptchaVO) sessionStrategy.getAttribute(swr, CaptchaController.IMAGE_CAPTCHA_SESSION_KEY);
+        ImageCaptchaVO imageCodeInSession = (ImageCaptchaVO) sessionStrategy.getAttribute(swr, CaptchaController.CAPTCHA_SESSION_KEY );
         String codeInRequest = ServletRequestUtils.getStringParameter(request, "imageCode");
 
         if (StringUtils.isBlank(codeInRequest)) {
@@ -90,13 +89,13 @@ public class CaptchaFilter extends OncePerRequestFilter implements InitializingB
             throw new CaptchaException("验证码不存在");
         }
         if (imageCodeInSession.isExpried()) {
-            sessionStrategy.removeAttribute(swr, CaptchaController.IMAGE_CAPTCHA_SESSION_KEY);
+            sessionStrategy.removeAttribute(swr, CaptchaController.CAPTCHA_SESSION_KEY);
             throw new CaptchaException("验证码已过期");
         }
         if (!StringUtils.equals(imageCodeInSession.getCode(), codeInRequest)) {
             throw new CaptchaException("验证码不匹配");
         }
         //验证通过 移除缓存
-        sessionStrategy.removeAttribute(swr, CaptchaController.IMAGE_CAPTCHA_SESSION_KEY);
+        sessionStrategy.removeAttribute(swr, CaptchaController.CAPTCHA_SESSION_KEY);
     }
 }

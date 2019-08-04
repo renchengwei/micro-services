@@ -1,44 +1,44 @@
-package com.xgg.microservices.pojo.vo;
+package com.xgg.microservices.security.captcha;
 
 import lombok.Data;
 
-import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
  * @Author: renchengwei
- * @Date: 2019-07-31
+ * @Date: 2019-08-03
  * @Description: TODO
  */
 @Data
-public class ImageCaptchaVO implements Serializable {
+public class CaptchaVO  implements Serializable {
 
-    private static final long serialVersionUID = 6363869750967464479L;
-
-    private BufferedImage image;
+    private static final long serialVersionUID = 4667369198044868126L;
+    /**
+     * 验证码
+     */
     private String code;
+    /**
+     * 失效时间 这个通常放在缓存中或维护在数据库中
+     */
     private LocalDateTime expireTime;
 
-    public ImageCaptchaVO(BufferedImage image, String code, int expireAfterSeconds){
-        this.image = image;
+    public CaptchaVO(String code, int expireAfterSeconds) {
         this.code = code;
         //多少秒后
         this.expireTime = LocalDateTime.now().plusSeconds(expireAfterSeconds);
     }
 
-    public ImageCaptchaVO(BufferedImage image, String code, LocalDateTime expireTime){
-        this.image = image;
+    public CaptchaVO(String code, LocalDateTime expireTime) {
         this.code = code;
         this.expireTime = expireTime;
     }
-
     /**
      * 是否失效
+     *
      * @return
      */
     public boolean isExpried() {
         return LocalDateTime.now().isAfter(expireTime);
     }
-
 }

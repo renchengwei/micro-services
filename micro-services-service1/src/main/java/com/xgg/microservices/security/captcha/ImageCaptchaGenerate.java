@@ -1,16 +1,14 @@
 package com.xgg.microservices.security.captcha;
 
 import com.google.code.kaptcha.Producer;
-import com.xgg.microservices.pojo.vo.ImageCaptchaVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.awt.image.BufferedImage;
 
 /**
  * @Author: renchengwei
  * @Date: 2019-08-03
- * @Description: 默认的图片验证码生成器
+ * @Description: 图片验证码生成器
  */
 public class ImageCaptchaGenerate implements CaptchaGenerate {
 

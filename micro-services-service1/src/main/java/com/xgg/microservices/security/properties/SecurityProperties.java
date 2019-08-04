@@ -11,7 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class SecurityProperties {
 
     private BrowserProperties browser = new BrowserProperties();
-    private ImageCaptchaProperties imageCaptcha = new ImageCaptchaProperties();
+    private CaptchaProperties captcha = new CaptchaProperties();
 
     public BrowserProperties getBrowser() {
         return browser;
@@ -21,11 +21,11 @@ public class SecurityProperties {
         this.browser = browser;
     }
 
-    public ImageCaptchaProperties getImageCaptcha() {
-        return imageCaptcha;
+    public CaptchaProperties getCaptcha() {
+        return captcha;
     }
 
-    public void setImageCaptcha(ImageCaptchaProperties imageCaptcha) {
-        this.imageCaptcha = imageCaptcha;
+    public void setCaptcha(CaptchaProperties captcha) {
+        this.captcha = captcha;
     }
 }
